@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static "post/detail.css" %}">
+
+
+<div class="container">
+	<div class="row">
+		
+		<!-- Blog post -->
+		<div class="card m-auto">
+			<img class="card-img-top" src="{{post_model.image.url}}">
+			<div class="card-body my-2">
+				<h2 class="card-title">{{post_model.title}}</h2>
+				<p class="card-text">{{post_model.body|linebreaksbr}}</p>
+				<p>
+					{% if post_model.author == request.user %}
+						<a href="{% url 'blog:edit' post_model.slug %}" class="btn btn-primary">Update</a>
+					{% endif %}
+				</p>
+				
+			</div>
+			<div class="card-footer text-muted">
+				Updated on {{post_model.date_updated}} by {{post_model.author}}
+			</div>
+		</div>
+		<!-- end Blog post -->
+
+	</div>
+</div>
+
+{% endblock content %}

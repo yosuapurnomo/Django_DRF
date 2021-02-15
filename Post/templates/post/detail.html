@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static "post/detail.css" %}">
@@ -12,11 +12,11 @@
 		<div class="card m-auto">
 			<img class="card-img-top" src="{{post_model.image.url}}">
 			<div class="card-body my-2">
-				<h2 class="card-title">{{post_model.title}}</h2>
-				<p class="card-text">{{post_model.body|linebreaksbr}}</p>
+				<h2 class="card-title">{{post_model.author.username}}</h2>
+				<p class="card-text">{{post_model.caption|linebreaksbr}}</p>
 				<p>
 					{% if post_model.author == request.user %}
-						<a href="{% url 'blog:edit' post_model.slug %}" class="btn btn-primary">Update</a>
+						<a href="{% url 'post:edit' post_model.slug %}" class="btn btn-primary">Update</a>
 					{% endif %}
 				</p>
 				

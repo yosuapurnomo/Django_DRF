@@ -1,27 +1,29 @@
+{% load static %}
+
 <link rel="stylesheet" type="text/css" href="{% static "post/blog_snippets.css" %}">
 
-{% if blog_post %}
+{% if post_model %}
 <div class="container">
 	<div class="row">
 
 		
 		<!-- Blog Post -->
 		<div class="card m-auto">
-			<a href="{% url 'blog:detail' post.slug %}">
-				<img class="card-img-top" src="{{blog_post.image.url}}">
+			<a href="{% url 'post:detail' post.slug %}">
+				<img class="card-img-top" src="{{post_model.image.url}}">
 			</a>
 			
 			<div class="card-body mt-2 mb-2">
-				<a href="{% url 'blog:detail' post.slug %}">
-					<h2 class="card-title">{{blog_post.title}}</h2>
+				<a href="{% url 'post:detail' post.slug %}">
+					<h2 class="card-title">{{post_model.author.username}}</h2>
 				</a>
-				<p class="card-text">{{blog_post.body|linebreaksbr|truncatechars:250}}</p>
-				{% if blog_post.author == request.user %}
-					<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
+				<p class="card-text">{{post_model.caption|linebreaksbr|truncatechars:250}}</p>
+				{% if post_model.author == request.user %}
+					<a href="{% url 'post:edit' post_model.slug %}" class="btn btn-primary">Update</a>
 				{% endif %}
 			</div>
 			<div class="card-footer text-muted">
-			  Updated on {{blog_post.date_updated}} by {{blog_post.author}}
+			  Updated on {{post_model.date_updated}} by {{post_model.author}}
 			</div>
 		</div>
 		

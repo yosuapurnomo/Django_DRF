@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 from django.utils.text import slugify
 from django.conf import settings
@@ -6,8 +7,17 @@ from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 
 # Create your models here.
+def update_filename(instance, filename):
+	ext = filename.split('.')[-1]
+	tes = PostModel.objects.filter(author=instance.author)
+	print(len(tes))
+	id = PostModel.objects.latest('id')
+	filename = "%s_%s.%s" % (instance.author.username, str(id.id+1), ext)
+	return filename
+
 def upload_location(instance, filename, **kwargs):
-	file_path = 'posting/{username}/{img}'.format(username=str(instance.author.username), img=filename)
+	path = update_filename(instance, filename)
+	file_path = 'posting/{username}/{img}'.format(username=str(instance.author.username), img=path)
 	return file_path
 
 
@@ -22,12 +32,12 @@ class PostModel(models.Model):
 	def __str__(self):
 		return self.slug
 
+	def save(self, *args, **kwargs):
+		super().save(*args, **kwargs)
+		if not self.slug:
+			self.slug = slugify(f"{self.author.username} - {self.id}")
+			self.save()
+
 @receiver(post_delete, sender=PostModel)
 def submission_delete(sender, instance, **kwargs):
 	instance.image.delete(False)
-
-def pre_save_posting(sender, instance, *args, **kwargs):
-	if not instance.slug:
-		instance.slug = slugify(instance.author.username + "-" + instance.id)
-
-pre_save.connect(pre_save_posting, sender=PostModel)

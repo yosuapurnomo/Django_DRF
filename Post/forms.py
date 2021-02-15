@@ -4,12 +4,12 @@ from .models import PostModel
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = PostModel
-        fields = ['caption', 'image']
+        fields = '__all__'
 
 class UpdatePostForm(forms.ModelForm):
     class Meta:
         model = PostModel
-        fields = ('caption', 'image')
+        fields = ('caption', 'image', 'slug')
 
     def save(self, commit=True):
     	posts_model = self.instance

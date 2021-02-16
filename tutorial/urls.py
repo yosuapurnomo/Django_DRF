@@ -19,6 +19,7 @@ urlpatterns = [
     path('post/', include('Post.urls', 'post')),
 
     # API Rest_Framework
-    path('api/post/', include('Post.api.urls', namespace='api_post'))
+    path('api/post/', include('Post.api.urls', namespace='api_post')),
+    path('api/account/', include('Account.api.urls', namespace='api_account')),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

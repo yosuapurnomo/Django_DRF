@@ -9,7 +9,7 @@ class CaseInsensitiveModelBackend(ModelBackend):
 		try:
 			case_insensitive_username_field = '{}__iexact'.format(UserModel.USERNAME_FIELD)
 			user = UserModel._default_manager.get(**{case_insensitive_username_field: username})
-		except UserModel.DoesNotExist as e:
+		except UserModel.DoesNotExist:
 			UserModel().set_password(password)
 		else:
 			if user.check_password(password) and self.user_can_authenticate(user):

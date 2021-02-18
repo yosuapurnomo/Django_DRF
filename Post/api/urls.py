@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import (api_detail_view, api_update_view, api_delete_view, api_create_view)
+from .views import (api_detail_view, api_update_view, api_delete_view, api_create_view, listPost)
 
 app_name = 'api_post'
 urlpatterns = [
+	path('list', listPost.as_view(), name='api_list'),
 	path('<slug>/', api_detail_view, name='api_detail'),
 	path('<slug>/update/', api_update_view, name='api_update'),
 	path('<slug>/delete/', api_delete_view, name='api_delete'),

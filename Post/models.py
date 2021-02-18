@@ -9,10 +9,12 @@ from django.dispatch import receiver
 # Create your models here.
 def update_filename(instance, filename):
 	ext = filename.split('.')[-1]
-	tes = PostModel.objects.filter(author=instance.author)
-	print(len(tes))
-	id = PostModel.objects.latest('id')
-	filename = "%s_%s.%s" % (instance.author.username, str(id.id+1), ext)
+	try:
+		post = PostModel.objects.filter(author=instance.author)
+		id = len(post) + 1
+	except Exception as e:
+		id = 1
+	filename = "%s_%s.%s" % (instance.author.username, str(id), ext)
 	return filename
 
 def upload_location(instance, filename, **kwargs):
@@ -32,12 +34,19 @@ class PostModel(models.Model):
 	def __str__(self):
 		return self.slug
 
-	def save(self, *args, **kwargs):
-		super().save(*args, **kwargs)
-		if not self.slug:
-			self.slug = slugify(f"{self.author.username} - {self.id}")
-			self.save()
-
 @receiver(post_delete, sender=PostModel)
 def submission_delete(sender, instance, **kwargs):
 	instance.image.delete(False)
+
+@receiver(pre_save, sender=PostModel)
+def slug_save(sender, instance, **kwargs):
+	if not instance.slug:
+		try:
+			len_user = PostModel.objects.filter(author=instance.author)
+			count = len(len_user) + 1	
+		except Exception as e:
+			count = 1
+		instance.slug = slugify(f"{instance.author.username} - {count}")
+	else:
+		img = sender.objects.get(slug=instance.slug)
+		img.delete(False)

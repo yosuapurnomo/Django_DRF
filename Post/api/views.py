@@ -2,9 +2,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from Post.models import PostModel
 from Account.models import Account
@@ -85,5 +86,52 @@ class listPost(ListAPIView):
 	authentication_class = (TokenAuthentication)
 	permission_class = (IsAuthenticated)
 	pagination_class = PageNumberPagination
+	filter_backends = (SearchFilter, OrderingFilter)
+	search_fields = ('caption', 'author__username')
 
+class createPost(CreateAPIView):
+	serializer_class = PostSerializers
+	authentication_class = (TokenAuthentication)
+	permission_class = (IsAuthenticated)
 
+	def perform_create(self, serializer):
+		serializer.save(author=self.request.user)
+
+	def get_success_headers(self, data):
+		try:
+			return {
+			'success':"Create success"
+			}
+		except (TypeError, KeyError):
+			return {
+			'failed':"Create failed"
+			}
+
+class updatePost(UpdateAPIView):
+	queryset = PostModel.objects.all()
+	serializer_class = PostSerializers
+	authentication_class = (TokenAuthentication)
+	permission_class = (IsAuthenticated)
+	lookup_field = 'slug'
+	lookup_url_kwarg = 'slug'
+
+	def put(self, request, *args, **kwargs):
+		obj = self.get_object()
+		print(obj)
+
+		if obj.author != request.user:
+			return Response({'response': "You dont have permission to edit that"})
+		return self.update(request, *args, **kwargs)
+
+class detailPost(RetrieveAPIView):
+	queryset = PostModel.objects.all()
+	serializer_class = PostSerializers
+	authentication_class = (TokenAuthentication)
+	permission_class = (IsAuthenticated)
+	lookup_field = 'slug'
+	lookup_url_kwarg = 'slug'
+
+	# def retrieve(self, request, *args, **kwargs):
+	# 	instance = sself.get_object()
+	# 	if instance.author != request.user:
+	# 		Resp

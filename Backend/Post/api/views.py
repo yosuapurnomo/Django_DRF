@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import SearchFilter, OrderingFilter
@@ -131,7 +131,19 @@ class detailPost(RetrieveAPIView):
 	lookup_field = 'slug'
 	lookup_url_kwarg = 'slug'
 
-	# def retrieve(self, request, *args, **kwargs):
-	# 	instance = sself.get_object()
-	# 	if instance.author != request.user:
-	# 		Resp
+class deletePost(DestroyAPIView):
+	queryset = PostModel.objects.all()
+	serializer_class  = PostSerializers
+	authentication_class = (TokenAuthentication)
+	permission_class = (IsAuthenticated)
+	lookup_field = 'slug'
+	lookup_url_kwarg = 'slug'
+
+	def destroy(self, request, *args, **kwargs):
+		user = self.get_object()
+		if user.author != request.user:
+
+			return Response({'failure': "You dont have permission to delete that"})
+
+		self.perform_destroy(user)
+		return Response({'success': "Delete success"}, status=status.HTTP_204_NO_CONTENT)

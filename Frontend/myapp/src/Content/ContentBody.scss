@@ -1,9 +1,19 @@
+.Parent{
+    display: grid;
+    grid-template-columns: auto;
+}
+
 .Posting {
-    grid-row: span;
-    columns: 1;
-    // position: static;
+    justify-content: center;
+    // margin-left: auto;
+    // margin: auto;
+    grid-row: 1;
+    grid-column: 1;
 }
 
 .Counter {
     margin-bottom: 10%;
+    grid-row: 1;
+    grid-column: 2;
+    justify-content: left;
 }

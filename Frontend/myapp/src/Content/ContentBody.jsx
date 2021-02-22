@@ -9,24 +9,30 @@ export default class ContentBody extends Component {
         super(props)
     
         this.state = {
-             
+             loop : 1,
         }
+
     }
 
+    changeLoop = (value) =>{
+        this.setState({
+            loop: value
+        })
+    }
+    
     render() {
+        
         return (
-            <Fragment>
+            <div className='Parent'>
                 <div className='Posting'>
-                    <Post title='Hello World' caption="First Post"/>
-                    <Post title='Halo Dunia' caption="Second Post"/>
-                    <Post title='Hello World' caption="Third Post"/>
-                    <Post title='Hello World' caption="Third Post"/>
+                <p>{this.state.loop}</p>
+                <Post title='Hello World' caption="First Post"/>
                 </div>
-                <hr/>
                 <div className="Counter">
-                    <CounterContent />
+                    <CounterContent getNumber={(value) => this.changeLoop(value)}/>
                 </div>
-            </Fragment>
+            </div>
+                
         )
     }
 }

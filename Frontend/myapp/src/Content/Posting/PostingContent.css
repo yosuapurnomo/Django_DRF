@@ -1,5 +1,5 @@
 .parent {
-  margin-left: 20%;
+  margin-left: 15%;
 }
 
 .Content {
@@ -7,6 +7,10 @@
   display: grid;
   float: left;
   padding: 1%;
+}
+
+.Content .text h1 {
+  margin-bottom: -10px;
 }
 
 .image-post {
@@ -17,4 +21,4 @@
   width: 300px;
   height: 200px;
 }
-/*# sourceMappingURL=ContentBody.css.map */
+/*# sourceMappingURL=PostingContent.css.map */

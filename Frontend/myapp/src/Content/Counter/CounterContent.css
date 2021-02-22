@@ -1,0 +1,11 @@
+.parent {
+  margin-left: 10%;
+}
+
+.parent .field {
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 50px;
+}
+/*# sourceMappingURL=CounterContent.css.map */

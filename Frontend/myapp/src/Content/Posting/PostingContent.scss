@@ -1,18 +1,20 @@
-.parent{
-    margin-left: 20%;
+.parent {
+    margin-left: 15%;
 }
 
-.Content{
+.Content {
     display: grid;
     float: left;
     padding: 1%;
+    .text h1 {
+        margin-bottom: -10px;
+    }
 }
 
 .image-post {
     margin-top: 5%;
-    img{
+    img {
         width: 300px;
         height: 200px;
-        // justify-content: right;
     }
 }

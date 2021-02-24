@@ -8,7 +8,7 @@ const Post = (props) => {
             <div className='parent'>
                 <div className='Content'>
                     <div className='image-post'>
-                        <img src={Bandung_2} alt=""/>
+                        <img src={props.image} alt={props.image}/>
                     </div>
                     <div className="text">
                         <h1>{props.title}</h1>

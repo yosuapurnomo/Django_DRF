@@ -80,14 +80,22 @@ def api_create_view(request):
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		return Response(serializer.errors, staus=status.HTTP_404_BAD_REQUEST)
 
+@api_view(['GET'])
+def api_list_post(request):
+	if request.method == 'GET':
+		post_model = PostModel.objects.all()
+		serializer = PostSerializers(post_model, many=True)
+		# print(post_model)
+		return Response(serializer.data)
+
 class listPost(ListAPIView):
 	queryset = PostModel.objects.all()
 	serializer_class = PostSerializers
-	authentication_class = (TokenAuthentication)
-	permission_class = (IsAuthenticated)
+	authentication_class = (None)
+	permission_class = (None)
 	pagination_class = PageNumberPagination
 	filter_backends = (SearchFilter, OrderingFilter)
-	search_fields = ('caption', 'author__username')
+	search_fields = ('caption', 'author')
 
 class createPost(CreateAPIView):
 	serializer_class = PostSerializers

@@ -13,4 +13,5 @@ class PostSerializers(serializers.ModelSerializer):
 
 	def get_username_from_author(self, model):
 		username = model.author.username
+		print(username)
 		return username

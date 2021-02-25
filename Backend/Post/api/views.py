@@ -12,7 +12,7 @@ from Account.models import Account
 from .serializers import PostSerializers
 
 @api_view(['GET',])
-@permission_classes((IsAuthenticated, ))
+# @permission_classes((IsAuthenticated, ))
 def api_detail_view(request, slug):
 	data = {}
 	try:

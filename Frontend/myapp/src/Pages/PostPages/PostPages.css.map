@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAA;EACH,OAAO,EAAE,IAAI;EACb,qBAAqB,EAAE,IAAI;CAC9B;;AAED,AAAA,QAAQ,CAAC;EACL,OAAO,EAAE,IAAI;EAGb,MAAM,EAAE,IAAI;CAGf",
+    "sources": [
+        "PostPages.scss"
+    ],
+    "names": [],
+    "file": "PostPages.css"
+}

@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ContentBody from './Content/ContentBody'
+import ContentBody from './Router/ContentBody'
 
-ReactDOM.render( <
-    React.StrictMode >
-    <
-    ContentBody / >
-    <
-    /React.StrictMode>,
+ReactDOM.render( 
+    <React.StrictMode >
+    <ContentBody />
+    </React.StrictMode>,
     document.getElementById('root')
 );
 

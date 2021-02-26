@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,QAAQ,CAAC;EACL,QAAQ,EAAE,IAAI;EACd,OAAO,EAAE,CAAC;CAEb;;AAED,AAAA,QAAQ,CAAC;EACL,aAAa,EAAE,GAAG;CACrB",
-    "sources": [
-        "ContentBody.scss"
-    ],
-    "names": [],
-    "file": "ContentBody.css"
-}

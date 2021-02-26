@@ -1,0 +1,12 @@
+.Parent {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto;
+      grid-template-columns: auto;
+}
+
+.Posting {
+  padding: 10px;
+  margin: 20px;
+}
+/*# sourceMappingURL=PostPages.css.map */

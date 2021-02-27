@@ -1,8 +1,16 @@
 import axios from 'axios'
 import React, { Component, Fragment } from 'react'
 import Post from '../../Content/Posting/PostingContent'
+import {connect} from 'react-redux';
 
-export default class PostPages extends Component {
+const mapStateToProps = (state) =>{
+    console.log(state)
+    return {
+        token: state.token
+    }
+}
+
+export default connect(mapStateToProps) (class PostPages extends Component {
     constructor(props) {
         super(props)
         
@@ -12,8 +20,11 @@ export default class PostPages extends Component {
     }
     
     componentDidMount(){
-        axios.get('http://127.0.0.1:8000/api/post/list/').then((res) =>{
-            console.log(res.data)
+        axios.get('http://127.0.0.1:8000/api/post/list/',{
+            headers:{
+                'Authorization': `Token d2b0071f61350e5de8209c0f6abcb1ccbe333fe2`
+            }
+        }).then((res) =>{
             this.setState({
                 post:res.data
             })
@@ -21,11 +32,11 @@ export default class PostPages extends Component {
     }
 
     handleDetail = (slug) => {
-        console.log(slug)
         this.props.history.push(`/detail/${slug}`)
     }
 
     render() {
+        console.log("PostPages : ", this.props)
         return (
             <Fragment>
                 <div className='Parent'>
@@ -44,4 +55,4 @@ export default class PostPages extends Component {
             </Fragment>
         )
     }
-}
+})

@@ -4,8 +4,6 @@ import './PostingContent.scss'
 export default class Post extends Component {
     constructor(props) {
         super(props)
-        console.log("Post : " + props)
-        console.log(props)
         this.state = {
              
         }

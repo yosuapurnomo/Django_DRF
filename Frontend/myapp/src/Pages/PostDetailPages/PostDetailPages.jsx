@@ -11,12 +11,13 @@ export default class PostDetailPages extends Component {
         }
     }
     
-
     componentDidMount(){
-        console.log("Detail : ")
-        console.log(this.props)
         let slug = this.props.match.params.slug
-        axios.get(`http://127.0.0.1:8000/api/post/${slug}/`).then(res =>{
+        axios.get(`http://127.0.0.1:8000/api/post/${slug}/`, {
+            headers:{
+                'Authorization': `Token d2b0071f61350e5de8209c0f6abcb1ccbe333fe2`
+            }
+        }).then(res =>{
             this.setState({
                 post:res.data
             })
@@ -26,7 +27,6 @@ export default class PostDetailPages extends Component {
         return (
             <Fragment>
                 <div className='Parent'>
-                    <p>Nama : {this.state.post.username}</p>
                     <div className='Posting'>
                        <PostingDetail 
                             key={this.state.post.slug} 

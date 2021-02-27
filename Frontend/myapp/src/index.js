@@ -3,12 +3,44 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import ContentBody from './Router/ContentBody'
+import ContentBody from './Router/ContentBody';
+import { createStore as reduxStore } from 'redux';
+import {Provider} from 'react-redux';
+
+const createStore = reduxStore;
+
+const globalState = {
+    token: ''
+}
+
+//Reducer
+const rootReducer = (state = globalState, action) =>{
+    switch (action.type) {
+        case "ADD_TOKEN":
+            return {
+                ...state,
+                token: state.token
+            }
+        
+        case "REMOVE_TOKEN":
+            return {
+                ...state,
+                token: ''
+            }
+
+        default:
+            return state
+    }
+ 
+}
+
+// Store
+const storeRedux = createStore(rootReducer);
 
 ReactDOM.render( 
-    <React.StrictMode >
-    <ContentBody />
-    </React.StrictMode>,
+        <Provider store={storeRedux}>
+            <ContentBody />
+        </Provider>,
     document.getElementById('root')
 );
 

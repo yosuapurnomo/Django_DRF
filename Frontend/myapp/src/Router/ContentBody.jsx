@@ -6,6 +6,7 @@ import PostDetailPages from '../Pages/PostDetailPages/PostDetailPages';
 
 import './ContentBody.scss';
 import Login from '../Pages/Login/Login';
+import Navbars from './Navbars/Navbars';
 
 
 export default class ContentBody extends Component {
@@ -16,9 +17,7 @@ export default class ContentBody extends Component {
             <Router>
               <Fragment>
                     <div className="navigation">
-                        <Link to="/" >Home</Link>
-                        <br/>
-                        <Link to="/login">Login</Link>
+                        <Navbars/>
                     </div>
                 <Route path="/" exact component={PostPages}/>
                 <Route path="/login" component={Login}/>

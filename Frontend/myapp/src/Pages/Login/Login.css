@@ -1,0 +1,14 @@
+.parent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space;
+      -ms-flex-pack: space;
+          justify-content: space;
+  margin-top: 20px;
+}
+
+.parent .formLogin {
+  margin-top: 20px;
+}
+/*# sourceMappingURL=Login.css.map */

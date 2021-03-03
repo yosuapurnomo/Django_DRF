@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react'
+import './Login.scss'
 import { Jumbotron, Button, Container, InputGroup, FormControl } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import {connect} from 'react-redux';
+import ImageCarousel from './ImageCarousel/ImageCarousel';
 
 const mapStateToProps = (state) =>{
     console.log("mapStateToProps : ", state)
@@ -12,6 +14,7 @@ const mapStateToProps = (state) =>{
 }
 
 const mapDispatchToProps = (dispatch) =>{
+    console.log(dispatch)
     return {
         token: () => dispatch({type: 'ADD_TOKEN'})
     }
@@ -56,24 +59,30 @@ export default connect(mapStateToProps, mapDispatchToProps) (class Login extends
         console.log("Login : ", this.props);
         return (
             <Fragment>
-                <Container>
-                  <Jumbotron>
-                    <h1>Instagram</h1>
-                    <InputGroup className="mb-3">
-                    <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
-                    </InputGroup.Prepend>
-                        <FormControl type='text' placeholder='Email' name='username' onChange={this.handleFormChange}/>
-                    </InputGroup>
-                    <InputGroup className="mb-3">
-                        <FormControl type='password' placeholder='Password' name='password' onChange={this.handleFormChange}/>
-                    </InputGroup>
-                    <p>
-                        <Button variant="primary" onClick={this.handleSubmit}>Login</Button>
-                    </p>
-                </Jumbotron>  
-                </Container>
-                
+                    <Container>
+                <div className="parent">
+                        <div className="imageCarousel">
+                            <ImageCarousel/>
+                        </div>
+                        <div className="formLogin">
+                            <Jumbotron>
+                            <h1 className="mb-4">Instagram</h1>
+                            <InputGroup className="mb-4">
+                            <InputGroup.Prepend>
+                                <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                            </InputGroup.Prepend>
+                                <FormControl type='text' placeholder='Email' name='username' onChange={this.handleFormChange}/>
+                            </InputGroup>
+                            <InputGroup className="mb-4">
+                                <FormControl type='password' placeholder='Password' name='password' onChange={this.handleFormChange}/>
+                            </InputGroup>
+                            <p>
+                                <Button variant="primary" onClick={this.handleSubmit}>Login</Button>
+                            </p>
+                        </Jumbotron> 
+                        </div>
+                </div>
+                    </Container>
             </Fragment>
         )
     }

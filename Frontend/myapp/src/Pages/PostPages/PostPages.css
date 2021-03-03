@@ -1,4 +1,5 @@
 .Parent {
+  margin-bottom: 50px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto;
